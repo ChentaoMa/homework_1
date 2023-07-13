@@ -25,7 +25,7 @@
 
 1. The `DELETE` `/question?question_id=<id>` method will not delete the question with target ID. It removes all questions that are not the target ID.
 
-2. The problem I found when I tried 4 methods. The ID that existed in the list at that time were 0,1,2. I choose to delete question with ID 2, and the result is 2,1.
+2. The problem was found when tring the whole 4 methods. The ID that existed in the list at that time were 0,1,2. Delete question by ID 2, and the result is 2,1.
 
 3. I don't have any thoughts about that. It's just that the designer got the wrong part about what to delete and what to remain.
 
@@ -45,7 +45,7 @@ let res = client.get("http://127.0.0.1:8088/questions").send().await?;
 
 1. Because the ID is determined when the question is created and does not change. As a result, there may be many identical IDs in the list.
 
-2. From the `Bug 2` I got the result list 2,1 . Then the existence of this problem has become inevitable. Just refresh the web page again and got the 2,1,2. Then DELETE with ID 2 . Got 2,2 
+2. From the `Bug 2` I got the result list 2,1 . Then the existence of this problem has become inevitable. Just refresh the web page again and got the 2,1,2. Then DELETE by ID 2 . Got 2,2 
 
 3. Because the ID is obtained by looking up the position of the question in the list. So there's a theoretical possibility of duplication. But according to common sense, this situation does not make sense. One possible solution is to construct a counter. And ID is equal to the current value of the counter.
 
@@ -92,7 +92,7 @@ let res = client.get("http://127.0.0.1:8088/questions").send().await?;
 
 2. When the same ID exists in the list, the `GET` and `DELETE` by ID need to be considered. After trying it, I found that the delete by ID did not have a problem. There was a problem getting by ID.
 
-3. There is a reasonable possibility that, in common sense, the ID cannot be repeated. So from the point of view of saving operational costs, the general algorithm will end after finding the target ID. However, because of the presence of multiple identical IDs, this algorithm has problems.
+3. There is a reasonable possibility that, in common sense, the ID cannot be repeated. So from the point of view of saving operational costs, the general algorithm will end after finding the target ID. It's not going to go through the rest of the list. However, because of the presence of multiple identical IDs, this algorithm has problems.
 
 4. First, run the `bug 3 -4` part. 
 
