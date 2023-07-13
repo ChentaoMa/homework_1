@@ -47,7 +47,7 @@ let res = client.get("http://127.0.0.1:8088/questions").send().await?;
 
 2. From the `Bug 2` I got the result list 2,1 . Then the existence of this problem has become inevitable. Just refresh the web page again and got the 2,1,2. Then DELETE by ID 2 . Got 2,2 
 
-3. Because the ID is obtained by looking up the position of the question in the list. So there's a theoretical possibility of duplication. But according to common sense, this situation does not make sense. One possible solution is to construct a counter. And ID is equal to the current value of the counter.
+3. Because the ID is obtained by looking up the position of the question in the list. So there's a theoretical possibility of duplication.Just use the DELETE method to adjust the position of the question in the list. Questions that populate the original location will then have the same ID. One possible solution is to construct a counter. And ID is equal to the current value of the counter.
 
 4. 
 
